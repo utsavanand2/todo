@@ -1,1 +1,1 @@
-# TODO App based on ReactJS and NodeJS
+# TODO App built with ReactJS and NodeJS
