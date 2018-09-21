@@ -4,6 +4,6 @@
    * frontend
    * backend
    
-   To start the local development server, cd into either of the two directories and run **npm install** and then **npmstart**.
+   To start the local development server, cd into either of the two directories and run **npm install** and then **npm      start**.
    This will launch the respective local development server on your machine.
    
