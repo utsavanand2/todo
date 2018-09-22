@@ -4,7 +4,7 @@
    * frontend
    * backend
    
-#### Note: Make sure you're running v8.x of Nodejs for React as of now only supports it
+#### Note: Make sure you're running v8.x of Nodejs for ReactJS
 
    To start the local development server, cd into either of the two directories and run
    ```
