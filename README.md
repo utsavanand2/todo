@@ -4,6 +4,12 @@
    * frontend
    * backend
    
-   To start the local development server, cd into either of the two directories and run **npm install** and then **npm      start**.
+#### Note: Make sure you're running v8.x of Nodejs for React as of now only supports it
+
+   To start the local development server, cd into either of the two directories and run
+   ```
+   npm install
+   npm start
+   ```
    This will launch the respective local development server on your machine.
    
