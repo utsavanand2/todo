@@ -5,6 +5,9 @@ const todoController = require(path.join(pathdir, '/controllers/todo-controller.
 
 const router = express.Router()
 
-router.get('/getTodo', todoController.getTodo)
+router.get('/getAllTodo', todoController.getAllTodo)
+router.get('/getTodoByID', todoController.getTodoById)
+router.put('/addTodo', todoController.addTodo)
+router.delete('/deleteTodoById', todoController.deleteTodoById)
 
 module.exports = router
