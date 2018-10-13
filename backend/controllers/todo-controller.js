@@ -7,10 +7,16 @@ const pattern = 'aA0'
 
 exports.getAllTodo = (req, res) => {
     Todo.find({}, (err, todos) => {
-        let todoMap = {}
+        let todoMap = []
+
+        if (err) {
+            console.error(err)
+            res.status(500)
+            res.end("Could not get")
+        }
 
         todos.forEach(todo => {
-            todoMap[todo.id] = todo
+            todoMap.push(todo)
         })
 
         res.send(todoMap)
@@ -21,6 +27,8 @@ exports.getTodoById = (req, res) => {
      Todo.findById(req.params.id, (err, todo) => {
          if (err) {
              console.error(err)
+             res.status(500)
+             res.end("Could not get todo")
          } else {
             res.send(todo)
          }
@@ -36,7 +44,10 @@ exports.addTodo = (req, res) => {
     todo.save((err) => {
         if(err){
             console.error(err)
+            res.status(500)
+            res.end("Could not add todo")
         } else {
+            res.status(200)
             res.send('Todo Added')
         }
         
@@ -47,7 +58,10 @@ exports.deleteTodoById = (req, res) => {
     Todo.findByIdAndRemove(req.params.id, (err) => {
         if(err) {
             console.error(err)
+            res.status(500)
+            res.end("Could not delete todo")
         } else {
+            res.status(200)
             res.send('Todo Deleted')
         }
     })
