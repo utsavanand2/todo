@@ -10,9 +10,10 @@ exports.getAllTodos = (req, res) => {
         let todoMap = []
 
         if (err) {
+            var response = {status: "Fail", data: "Null"}
             console.error(err)
             res.status(500)
-            res.end("Could not get")
+            res.end(JSON.stringify(response))
         }
 
         todos.forEach(todo => {
@@ -26,10 +27,13 @@ exports.getAllTodos = (req, res) => {
 exports.getTodoById = (req, res) => {
      Todo.findById(req.params.id, (err, todo) => {
          if (err) {
+             var response = {status: "Fail", data: "Null"}
              console.error(err)
              res.status(500)
-             res.end("Could not get todo")
+             res.end(JSON.stringify(response))
          } else {
+            var response = {status: "Success", data: todo}
+            res.status(200)
             res.send(todo)
          }
          
@@ -41,14 +45,16 @@ exports.addTodo = (req, res) => {
         task: req.body.todo,
     })
 
-    todo.save((err) => {
+    todo.save((err, todo) => {
         if(err){
+            var response = {status: "Fail", data: "Null"}
             console.error(err)
             res.status(500)
-            res.end("Could not add todo")
+            res.end(JSON.stringify(response))
         } else {
+            var response = {status: "Success", data: todo}
             res.status(200)
-            res.send('Todo Added')
+            res.send(JSON.stringify(response))
         }
         
     })
@@ -61,38 +67,44 @@ exports.updateTodoById = (req, res) => {
         
         (err, todo) => {
             if(err) {
+                var response = {status: "Fail", data: "Null"}
                 console.error(err)
                 res.status(500)
                 res.end("Could not update todo")
             } else {
+                var response = {status: "Success", data: todo}
                 res.status(200)
-                res.send(todo)
+                res.send(JSON.stringify(response))
             }
         })
 }
 
 exports.deleteTodoById = (req, res) => {
-    Todo.findByIdAndRemove(req.params.id, (err) => {
-        if(err) {
+    Todo.findByIdAndRemove(req.params.id, (err, todo) => {
+        if(err, todo) {
+            var response = {status: "Fail", data: "Null"}
             console.error(err)
             res.status(500)
-            res.end("Could not delete todo")
+            res.end(JSON.stringify(response))
         } else {
+            var response = {status: "Success", data: todo}
             res.status(200)
-            res.send('Todo Deleted')
+            res.send(JSON.stringify(response))
         }
     })
 }
 
 exports.deleteAllTodos = (req, res) => {
-    Todo.remove({}, (err) => {
+    Todo.remove({}, (err, todo) => {
         if(err) {
+            var response = {status: "Fail", data: "Null"}
             console.error(err)
             res.status(500)
-            res.end("Could not delete all todos")
+            res.end(JSON.stringify(response))
         } else {
+            var response = {status: "Success", data: todo}
             res.status(200)
-            res.send("All Todos deleted")
+            res.send(JSON.stringify(response))
         }
     })
 }
