@@ -54,6 +54,23 @@ exports.addTodo = (req, res) => {
     })
 }
 
+exports.updateTodoById = (req, res) => {
+    Todo.findByIdAndUpdate(req.params.id, 
+        req.body.todo, 
+        {new: true},
+        
+        (err, todo) => {
+            if(err) {
+                console.error(err)
+                res.status(500)
+                res.end("Could not update todo")
+            } else {
+                res.status(200)
+                res.send(todo)
+            }
+        })
+}
+
 exports.deleteTodoById = (req, res) => {
     Todo.findByIdAndRemove(req.params.id, (err) => {
         if(err) {

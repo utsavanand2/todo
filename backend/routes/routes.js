@@ -8,6 +8,7 @@ const router = express.Router()
 router.get('/getAllTodos', todoController.getAllTodos)
 router.get('/getTodoByID/:id', todoController.getTodoById)
 router.put('/addTodo', todoController.addTodo)
+router.put('/updateTodoById/:id', todoController.updateTodoById)
 router.delete('/deleteTodoById/:id', todoController.deleteTodoById)
 router.delete('/deleteAllTodos', todoController.deleteAllTodos)
 
