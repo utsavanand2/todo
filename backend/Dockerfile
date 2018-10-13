@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:8.12.0-alpine
 LABEL maintainer="utsavanand2@gmail.com"
 COPY ./ /app
 WORKDIR /app
