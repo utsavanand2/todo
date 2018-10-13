@@ -1,0 +1,23 @@
+version: "2"
+services:
+  be:
+    container_name: be
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      args:
+        buildno: 1
+    image: be:v0.1
+    restart: always
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+  
+  mongo:
+    container_name: mongo
+    image: mongo:3.2.21-jessie
+    volumes:
+        - /Users/utsavanand/data/db:/data/db
+    ports:
+      - "27017:27017"
