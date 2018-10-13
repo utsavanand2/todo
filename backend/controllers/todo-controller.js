@@ -8,7 +8,7 @@ const pattern = 'aA0'
 exports.getAllTodos = (req, res) => {
     Todo.find({}, (err, todos) => {
         let todoMap = []
-
+        res.setHeader('content-type', 'application/json')
         if (err) {
             var response = {status: "Fail", data: "Null"}
             console.error(err)
@@ -26,6 +26,7 @@ exports.getAllTodos = (req, res) => {
 
 exports.getTodoById = (req, res) => {
      Todo.findById(req.params.id, (err, todo) => {
+         res.setHeader('content-type', 'application/json')
          if (err) {
              var response = {status: "Fail", data: "Null"}
              console.error(err)
@@ -46,6 +47,7 @@ exports.addTodo = (req, res) => {
     })
 
     todo.save((err, todo) => {
+        res.setHeader('content-type', 'application/json')
         if(err){
             var response = {status: "Fail", data: "Null"}
             console.error(err)
@@ -66,6 +68,7 @@ exports.updateTodoById = (req, res) => {
         {new: true},
         
         (err, todo) => {
+            res.setHeader('content-type', 'application/json')
             if(err) {
                 var response = {status: "Fail", data: "Null"}
                 console.error(err)
@@ -81,6 +84,7 @@ exports.updateTodoById = (req, res) => {
 
 exports.deleteTodoById = (req, res) => {
     Todo.findByIdAndRemove(req.params.id, (err, todo) => {
+        res.setHeader('content-type', 'application/json')
         if(err, todo) {
             var response = {status: "Fail", data: "Null"}
             console.error(err)
@@ -96,6 +100,7 @@ exports.deleteTodoById = (req, res) => {
 
 exports.deleteAllTodos = (req, res) => {
     Todo.remove({}, (err, todo) => {
+        res.setHeader('content-type', 'application/json')
         if(err) {
             var response = {status: "Fail", data: "Null"}
             console.error(err)
