@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
 import './App.css';
-import SingleTodo from './singleTodo'
+import SingleTodo from './singleTodo';
+import axios from 'axios';
 
 class App extends Component {
   
   constructor() {
     super();
+    this.baseurl = "http://127.0.0.1:8080/todo/"
     this.state = {
       todos: [],
-      currentTodo: ""
+      currentTodo: "",
+      todo: "",
+      _id: ""
     };
+    this.getAllTodos()
   }
 
   onInputChange = e => {
     this.setState({ currentTodo: e.target.value })
+  }
+
+  getAllTodos = () => {
+    let url = this.baseurl + "getAllTodo"
+    axios.get(url)
+    .then((res) => {
+      this.setState(prevState => {
+        todos: [...prevState.todos, res.data]
+      })
+    })
   }
 
   onClick = () => {
@@ -39,9 +54,11 @@ class App extends Component {
     return (
       <div>
         <input placeholder="Enter todo" value={this.state.currentTodo} onChange={this.onInputChange}/>
-        <button onClick={this.onClick}>Add!</button>
+        <button id="add" onClick={this.onClick}>Add!</button>
         <br/>
+        <div id="info">
         { this.state.todos.length === 0 ? "Nothing todo yet!" : <ul>{bulletedTodos}</ul>}
+        </div>
       </div>
     );
   }
