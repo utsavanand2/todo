@@ -5,7 +5,7 @@ const router = require('./routes/routes')
 
 let app = express()
 
-const url = "mongodb://localhost:27017/todo"
+const url = "mongodb://mongo:27017/local"
 const mongoDb = process.env.MONGODB_URL || url
 mongoose.connect(mongoDb, { useNewUrlParser: true })
 mongoose.Promise = global.Promise

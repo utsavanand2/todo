@@ -5,7 +5,7 @@ const Todo = require(path.join(pathdir, '/models/todo-model.js'))
 const len = 10
 const pattern = 'aA0'
 
-exports.getAllTodo = (req, res) => {
+exports.getAllTodos = (req, res) => {
     Todo.find({}, (err, todos) => {
         let todoMap = []
 
@@ -63,6 +63,19 @@ exports.deleteTodoById = (req, res) => {
         } else {
             res.status(200)
             res.send('Todo Deleted')
+        }
+    })
+}
+
+exports.deleteAllTodos = (req, res) => {
+    Todo.remove({}, (err) => {
+        if(err) {
+            console.error(err)
+            res.status(500)
+            res.end("Could not delete all todos")
+        } else {
+            res.status(200)
+            res.send("All Todos deleted")
         }
     })
 }
