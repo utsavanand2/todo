@@ -6,32 +6,49 @@ const len = 10
 const pattern = 'aA0'
 
 exports.getAllTodo = (req, res) => {
+    Todo.find({}, (err, todos) => {
+        let todoMap = {}
 
+        todos.forEach(todo => {
+            todoMap[todo.id] = todo
+        })
+
+        res.send(todoMap)
+    })
 }
 
 exports.getTodoById = (req, res) => {
-     
+     Todo.findById(req.params.id, (err, todo) => {
+         if (err) {
+             console.error(err)
+         } else {
+            res.send(todo)
+         }
+         
+     })
 }
 
 exports.addTodo = (req, res) => {
     let todo = new Todo({
         task: req.body.todo,
-        id: randomId(len, pattern)
     })
 
     todo.save((err) => {
         if(err){
-            return next(err)
+            console.error(err)
+        } else {
+            res.send('Todo Added')
         }
-        res.send('Todo Added')
+        
     })
 }
 
 exports.deleteTodoById = (req, res) => {
     Todo.findByIdAndRemove(req.params.id, (err) => {
         if(err) {
-            return next(err)
+            console.error(err)
+        } else {
+            res.send('Todo Deleted')
         }
-        res.send('Todo Deleted')
     })
 }
